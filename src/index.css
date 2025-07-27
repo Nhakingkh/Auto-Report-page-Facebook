@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Matrix-themed Facebook Reporting Tool Design System 
+   Neon green hacker aesthetic with Khmer language support
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Matrix Green Theme - Dark Mode Only */
+    --background: 120 100% 3%;
+    --foreground: 120 100% 90%;
+
+    --card: 120 50% 5%;
+    --card-foreground: 120 100% 90%;
+
+    --popover: 120 50% 5%;
+    --popover-foreground: 120 100% 90%;
+
+    /* Neon Green Primary */
+    --primary: 120 100% 50%;
+    --primary-foreground: 120 100% 5%;
+
+    --secondary: 120 30% 10%;
+    --secondary-foreground: 120 100% 90%;
+
+    --muted: 120 20% 8%;
+    --muted-foreground: 120 50% 60%;
+
+    --accent: 120 100% 50%;
+    --accent-foreground: 120 100% 5%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 50% 15%;
+    --input: 120 50% 8%;
+    --ring: 120 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Matrix Effects - Enhanced for dark mode */
+    --matrix-primary: 120 100% 50%;
+    --matrix-secondary: 120 100% 30%;
+    --matrix-glow: 120 100% 50%;
+    --matrix-shadow: 120 100% 10%;
+    
+    /* Success Animation - Enhanced glow */
+    --success-glow: 120 100% 50%;
+    --success-bg: 120 100% 5%;
+    
+    /* Cyber Elements */
+    --cyber-border: 120 100% 40%;
+    --cyber-accent: 120 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-kantumruy;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Matrix Rain Animation */
+  .matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.1;
+  }
+
+  .matrix-char {
+    position: absolute;
+    color: hsl(var(--matrix-primary));
+    font-family: 'Kantumruy Pro', monospace;
+    font-size: 18px;
+    animation: matrix-fall 3s linear infinite;
+  }
+
+  /* Neon Glow Effects */
+  .neon-glow {
+    box-shadow: 
+      0 0 5px hsl(var(--matrix-glow)),
+      0 0 10px hsl(var(--matrix-glow)),
+      0 0 20px hsl(var(--matrix-glow)),
+      0 0 40px hsl(var(--matrix-glow));
+  }
+
+  .neon-text {
+    color: hsl(var(--matrix-primary));
+    text-shadow: 
+      0 0 5px hsl(var(--matrix-glow)),
+      0 0 10px hsl(var(--matrix-glow)),
+      0 0 20px hsl(var(--matrix-glow));
+  }
+
+  /* Cyber Border */
+  .cyber-border {
+    border: 2px solid hsl(var(--cyber-border));
+    border-image: linear-gradient(45deg, 
+      hsl(var(--cyber-border)), 
+      hsl(var(--cyber-accent)), 
+      hsl(var(--cyber-border))
+    ) 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--matrix-glow) / 0.4), 
+      transparent
+    );
+    animation: cyber-scan 3s infinite;
+  }
+
+  /* Glitch Effect */
+  .glitch {
+    position: relative;
+    animation: glitch 0.3s infinite;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    animation: glitch-1 0.3s infinite;
+    color: hsl(var(--matrix-primary));
+    z-index: -1;
+  }
+
+  .glitch::after {
+    animation: glitch-2 0.3s infinite;
+    color: hsl(var(--destructive));
+    z-index: -2;
+  }
+
+  /* Success Animation */
+  .success-checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid hsl(var(--success-glow));
+    position: relative;
+    animation: success-pulse 1s ease-out;
+  }
+
+  .success-checkmark::after {
+    content: '';
+    position: absolute;
+    left: 35%;
+    top: 50%;
+    width: 15px;
+    height: 30px;
+    border: solid hsl(var(--success-glow));
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg) translate(-50%, -50%);
+    animation: checkmark-draw 0.5s ease-out 0.5s both;
+  }
+
+  /* Button Enhancements */
+  .btn-matrix {
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent))
+    );
+    border: 2px solid hsl(var(--cyber-border));
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-matrix:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 0 20px hsl(var(--matrix-glow) / 0.5),
+      inset 0 0 20px hsl(var(--matrix-glow) / 0.1);
+  }
+
+  .btn-matrix::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--matrix-glow) / 0.4), 
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .btn-matrix:hover::before {
+    left: 100%;
+  }
+
+  /* Terminal Effect */
+  .terminal {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--cyber-border));
+    border-radius: var(--radius);
+    font-family: 'Kantumruy Pro', monospace;
+    position: relative;
+  }
+
+  .terminal::before {
+    content: '> ';
+    color: hsl(var(--matrix-primary));
+  }
+
+  /* Loading Spinner */
+  .matrix-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid hsl(var(--border));
+    border-top: 3px solid hsl(var(--matrix-primary));
+    border-radius: 50%;
+    animation: matrix-spin 1s linear infinite;
+  }
+
+  .matrix-spinner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid hsl(var(--matrix-glow));
+    border-radius: 50%;
+    animation: matrix-spin 2s linear infinite reverse;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes matrix-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(-100vh);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes cyber-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(1px, -1px); }
+  40% { transform: translate(1px, 1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(-1px, 1px); }
+}
+
+@keyframes success-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmark-draw {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  50% {
+    width: 15px;
+    height: 0;
+  }
+  100% {
+    width: 15px;
+    height: 30px;
+  }
+}
+
+@keyframes matrix-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+
+@keyframes explosion {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
